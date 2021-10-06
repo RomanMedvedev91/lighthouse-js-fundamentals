@@ -101,3 +101,137 @@ console.log(
     { name: "Domascus", course: "Web" },
   ])
 );
+
+// kata 5
+const urlEncode = function (text) {
+  // Put your solution here
+  let string = "";
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === " ") {
+      string += "%20";
+    } else {
+      string += text[i];
+    }
+  }
+  return string;
+};
+
+console.log(urlEncode("Lighthouse Labs"));
+console.log(urlEncode(" Lighthouse Labs "));
+console.log(urlEncode("blue is greener than purple for sure"));
+
+// kata 6
+const whereCanIPark = function (spots, vehicle) {
+  // Code here!
+  let coordinate = [];
+
+  for (let i = 0; i < spots.length; i++) {
+    for (let j = 0; j < spots[i].length; j++) {
+      //     check if spot has alreary found
+      if (coordinate.length === 0) {
+        if (vehicle === "regular") {
+          if (spots[i][j] === "R") {
+            coordinate = [j, i];
+          }
+        } else if (vehicle === "small") {
+          if (spots[i][j] === "S" || spots[i][j] === "R") {
+            coordinate = [j, i];
+          }
+        } else if (vehicle === "motorcycle") {
+          if (
+            spots[i][j] === "R" ||
+            spots[i][j] === "S" ||
+            spots[i][j] === "M"
+          ) {
+            coordinate = [j, i];
+          }
+        }
+      } else break;
+    }
+  }
+  return coordinate.length === 0 ? false : coordinate;
+};
+
+console.log(
+  whereCanIPark(
+    [
+      // COLUMNS ARE X
+      // 0    1    2    3    4    5
+      ["s", "s", "s", "S", "R", "M"], // 0 ROWS ARE Y
+      ["s", "M", "s", "S", "r", "M"], // 1
+      ["s", "M", "s", "S", "r", "m"], // 2
+      ["S", "r", "s", "m", "r", "M"], // 3
+      ["S", "r", "s", "m", "r", "M"], // 4
+      ["S", "r", "S", "M", "M", "S"], // 5
+    ],
+    "regular"
+  )
+);
+
+console.log(
+  whereCanIPark(
+    [
+      ["M", "M", "M", "M"],
+      ["M", "s", "M", "M"],
+      ["M", "M", "M", "M"],
+      ["M", "M", "r", "M"],
+    ],
+    "small"
+  )
+);
+
+console.log(
+  whereCanIPark(
+    [
+      ["s", "s", "s", "s", "s", "s"],
+      ["s", "m", "s", "S", "r", "s"],
+      ["s", "m", "s", "S", "r", "s"],
+      ["S", "r", "s", "m", "r", "s"],
+      ["S", "r", "s", "m", "R", "s"],
+      ["S", "r", "S", "M", "m", "S"],
+    ],
+    "motorcycle"
+  )
+);
+
+// kata 7
+const checkAir = function (samples, threshold) {
+  // Code here!
+  let indexOfPollution = 0;
+
+  for (let i = 0; i < samples.length; i++) {
+    if (samples[i] === "dirty") {
+      indexOfPollution++;
+    }
+  }
+
+  if (indexOfPollution / samples.length <= threshold) {
+    return "clean";
+  } else {
+    return "Polluted";
+  }
+};
+
+console.log(
+  checkAir(
+    [
+      "clean",
+      "clean",
+      "dirty",
+      "clean",
+      "dirty",
+      "clean",
+      "clean",
+      "dirty",
+      "clean",
+      "dirty",
+    ],
+    0.3
+  )
+);
+
+console.log(checkAir(["dirty", "dirty", "dirty", "dirty", "clean"], 0.25));
+
+console.log(
+  checkAir(["clean", "dirty", "clean", "dirty", "clean", "dirty", "clean"], 0.9)
+);
