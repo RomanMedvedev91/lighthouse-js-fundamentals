@@ -235,3 +235,37 @@ console.log(checkAir(["dirty", "dirty", "dirty", "dirty", "clean"], 0.25));
 console.log(
   checkAir(["clean", "dirty", "clean", "dirty", "clean", "dirty", "clean"], 0.9)
 );
+
+// kata8
+const repeatNumbers = function (data) {
+  // Put your solution here
+  let string = "";
+
+  for (i = 0; i < data.length; i++) {
+    for (j = 0; j < data[i][1]; j++) {
+      string += data[i][0];
+    }
+
+    // put a comma between elements
+    if (data.length !== 1 && i + 1 < data.length) {
+      string += ", ";
+    }
+  }
+
+  return string;
+};
+
+console.log(repeatNumbers([[1, 10]]));
+console.log(
+  repeatNumbers([
+    [1, 2],
+    [2, 3],
+  ])
+);
+console.log(
+  repeatNumbers([
+    [10, 4],
+    [34, 6],
+    [92, 2],
+  ])
+);
